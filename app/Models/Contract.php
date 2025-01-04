@@ -10,19 +10,20 @@ class Contract extends Model
     protected $table = 'contracts';
 
     protected $fillable = [
-        'contract_name' => 'required|string|max:255',
-        'contract_date' => 'required|date_format:Y-m-d',
-        'contract_hijri_date' => 'required|date_format:Y-m-d',
-        'contract_location' => 'required|string|max:255',
-        'contract_party_a' => 'required|string|max:255',
-        'contract_party_a_crn' => 'required|integer|max:10',
-        'contract_party_a_location' => 'required|string|max:255',
-        'contract_party_b' => 'required|string|max:255',
-        'contract_party_b_crn' => 'required|integer|max:10',
-        'contract_party_b_location' => 'required|string|max:255',
-        'contract_party_b_detalide_needs' => 'required|string|max:300',
-        'contract_value' => 'required|string|max:255',
-        'contract_value_words' => 'required|string|max:255',
+        'contract_name',
+        'contract_date',
+        'contract_hijri_date',
+        'contract_location',
+        'contract_party_a',
+        'contract_party_a_crn',
+        'contract_party_a_location',
+        'contract_party_b',
+        'contract_party_b_crn',
+        'contract_party_b_location',
+        'contract_party_b_detailed_needs',
+        'contract_value',
+        'currency',
+        'contract_value_words',
         // Add other fields as needed
     ];
 }

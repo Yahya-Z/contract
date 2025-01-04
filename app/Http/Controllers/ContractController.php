@@ -21,26 +21,39 @@ class ContractController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'contract_name' => 'required|string|max:255',
-            'contract_date' => 'required|date_format:Y-m-d',
-            'contract_hijri_date' => 'required|date_format:Y-m-d',
-            'contract_location' => 'required|string|max:255',
-            'contract_party_a' => 'required|string|max:255',
-            'contract_party_a_crn' => 'required|integer|max:10',
-            'contract_party_a_location' => 'required|string|max:255',
-            'contract_party_b' => 'required|string|max:255',
-            'contract_party_b_crn' => 'required|integer|max:10',
-            'contract_party_b_location' => 'required|string|max:255',
-            'contract_party_b_detailde_needs' => 'required|string|max:1000',
-            'contract_value' => 'required|string|max:255',
-            'currency' => 'required|string|max:3', 
-            'contract_value_words' => 'required|string|max:255',
-            // Add other validation rules as needed
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'contract_name' => 'required|string|max:255',
+                'contract_date' => 'required|date_format:Y-m-d',
+                'contract_hijri_date' => 'required|date_format:Y-m-d',
+                'contract_location' => 'required|string|max:255',
+                'contract_party_a' => 'required|string|max:255',
+                'contract_party_a_crn' => 'required|integer',
+                'contract_party_a_location' => 'required|string|max:255',
+                'contract_party_b' => 'required|string|max:255',
+                'contract_party_b_crn' => 'required|integer',
+                'contract_party_b_location' => 'required|string|max:255',
+                'contract_party_b_detailed_needs' => 'nullable|string|max:1000',
+                'contract_value' => 'required|string|max:255',
+                'currency' => 'required|string|max:3', 
+                'contract_value_words' => 'required|string|max:255',
+                // Add other validation rules as needed                           
+            ]);
+            
+            // Save the validated data to the database
+            Contract::create($request->input());
+    
+            // Redirect to contracts page with success message
+            return redirect()->route('contracts.index')->with('success', 'Contract saved successfully.');
+    
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Display validation errors
+            dd($e->errors());
+        }
+    }
 
-        Contract::create($request->input());
-
-        return redirect()->route('contracts.index')->with('success', 'Contract saved successfully.');
+    public function show(Contract $contract)
+    {
+        return view('contracts.show', compact('contract'));
     }
 }

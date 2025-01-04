@@ -1,25 +1,20 @@
 <x-layout>
 
-<h1>Contract Info</h1>
+<h1 class="page-title">Contract Info</h1>
 
-<a href="{{ route('contracts.create') }}">New Contract</a>
+<a href="{{ route('contracts.create') }}" class="new-contract-btn">New Contract</a>
 
-@foreach ($contracts as $contract)
-    <h2>{{ $contract->contract_name }}</h2>
-    <p>{{ $contract->date }}</p>
-    <p>{{ $contract->hijri_date }}</p>
-    <p>{{ $contract->location }}</p>
-    <p>{{ $contract->party_a }}</p>
-    <p>{{ $contract->party_a_crn }}</p>
-    <p>{{ $contract->party_a_location }}</p>
-    <p>{{ $contract->party_b }}</p>
-    <p>{{ $contract->party_b_crn }}</p>
-    <p>{{ $contract->party_b_location }}</p>
-    <p>{{ $contract->party_b_detailed_needs }}</p>
-    <p>{{ $contract->value }}</p>
-    <p>{{ $contract->currency }}</p>
-    <p>{{ $contract->value_words }}</p>
--
-@endforeach
+<div class="contract-grid mt-4">
+    @foreach ($contracts as $contract)
+        <div class="contract-card">
+            <h2 class="contract-name">{{ $contract->contract_name }}</h2>
+            <p class="contract-detail"><strong>Date:</strong> {{ $contract->contract_date }}</p>
+            <p class="contract-detail"><strong>Location:</strong> {{ $contract->contract_location }}</p>
+            <p class="contract-detail"><strong>Party A:</strong> {{ $contract->contract_party_a }}</p>
+            <p class="contract-detail"><strong>Party B:</strong> {{ $contract->contract_party_b }}</p>
+            <a href="{{ route('contracts.show', $contract->id) }}" class="view-details-link">View Details</a>
+        </div>
+    @endforeach
+</div>
 
 </x-layout>

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('contract_party_b');
             $table->string('contract_party_b_crn');
             $table->string('contract_party_b_location');
-            $table->string('contract_party_b_detailde_needs')->nullable();
+            $table->string('contract_party_b_detailed_needs')->nullable();
             $table->integer('contract_value');
             $table->string('currency');
             $table->string('contract_value_words');

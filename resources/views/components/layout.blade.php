@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
     <style>
@@ -96,11 +97,207 @@
             padding: 15px;
             font-size: 20px;
         }
+        /* Page Title */
+        .page-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #f1faee;
+            margin-top: 20px;
+        }
+
+        /* New Contract Button */
+        .new-contract-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #457b9d; /* Blue button color */
+            color: #f1faee;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .new-contract-btn:hover {
+            background-color: #1d3557; /* Darker blue on hover */
+        }
+
+        /* Contract Grid */
+        .contract-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Contract Card */
+        .contract-card {
+            background-color: #2b3945; /* Dark card background */
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            color: #f1faee;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .contract-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e9ecef; /* Light gray for the title */
+            margin-bottom: 10px;
+        }
+
+        .contract-detail {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .contract-detail strong {
+            color: #a8dadc; /* Light teal for labels */
+        }
+
+        /* View Details Link */
+        .view-details-link {
+            margin-top: 10px;
+            text-decoration: none;
+            color: #457b9d; /* Blue link color */
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .view-details-link:hover {
+            color: #1d3557; /* Darker blue on hover */
+        }
+        
+        /* General Container */
+        .contract-details-container {
+        max-width: 900px;
+        margin: 40px auto;
+        background-color: #2e3b4e;
+        color: #f8f9fa;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        font-family: Arial, sans-serif;
+        }
+
+        /* Header Section */
+        .contract-header {
+        text-align: left;
+        margin-bottom: 20px;
+        }
+
+        .contract-title {
+        font-size: 28px;
+        color: #f8f9fa;
+        margin-bottom: 15px;
+        }
+
+        .contract-meta p {
+        margin: 5px 0;
+        font-size: 14px;
+        }
+
+        /* Parties Section */
+        .contract-parties {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        margin-top: 10px;
+        gap: 20px;
+        }
+
+        .party {
+        flex: 1;
+        background-color:rgb(60, 77, 99);
+        padding: 20px;
+        border-radius: 8px;
+        }
+
+        .party h2 {
+        font-size: 25px;
+        margin-bottom: 15px;
+        color:rgb(231, 231, 231);
+        }
+
+        .party p {
+        font-size: 14px;
+        margin: 5px 0;
+        }
+
+        /* Details Section */
+        .contract-details {
+        margin-bottom: 30px;
+        }
+
+        .contract-details h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: #a8dadc;
+        }
+
+        .contract-details p {
+        font-size: 14px;
+        }
+
+        /* Financial Section */
+        .contract-financial {
+        margin-bottom: 30px;
+        }
+
+        .financial-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        }
+
+        .contract-financial p {
+        font-size: 14px;
+        }
+
+        /* Back Button */
+        .contract-footer {
+        text-align: center;
+        }
+
+        .back-button {
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: bold;
+        color: #457b9d;
+        padding: 10px 20px;
+        background-color: #1d3557;
+        border-radius: 6px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .back-button:hover {
+        background-color: #457b9d;
+        color: #f8f9fa;
+        }
+
+        .tt{
+            color: white !important;
+            margin-top: 10%;
+        }
+        .p{
+            color:rgb(182, 182, 182) !important;
+            margin: 0px 0px 0px 0px;
+        }
+        .top-p{
+            margin-top: 17px;
+        }
+        
     </style>
 </head>
 <body class="bg-gray-100">
 
     {{ $slot }}
 
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
