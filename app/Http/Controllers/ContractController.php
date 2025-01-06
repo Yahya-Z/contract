@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contract;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ContractController extends Controller
 {
@@ -26,6 +27,7 @@ class ContractController extends Controller
                 'contract_name' => 'required|string|max:255',
                 'contract_date' => 'required|date_format:Y-m-d',
                 'contract_hijri_date' => 'required|date_format:Y-m-d',
+                'contract_number' => 'required|string|max:255',
                 'contract_location' => 'required|string|max:255',
                 'contract_party_a' => 'required|string|max:255',
                 'contract_party_a_crn' => 'required|integer',
@@ -55,5 +57,24 @@ class ContractController extends Controller
     public function show(Contract $contract)
     {
         return view('contracts.show', compact('contract'));
+    }
+
+    public function generatePdf($id)
+    {
+        $contract = Contract::findOrFail($id);
+        $pdf = PDF::loadView('pdf.pdf_layout', compact('contract'))->setPaper('a4', 'portrait');;
+
+        return $pdf->stream('contract_preview.pdf');
+    }
+
+    public function downloadPdf($id)
+    {
+        $contract = Contract::findOrFail($id);
+        $pdf = PDF::loadView('pdf.pdf_layout', compact('contract'))->setPaper('a4', 'portrait');;
+
+        return response($pdf->stream('contract_preview.pdf'), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="contract_preview.pdf"',
+        ]);
     }
 }

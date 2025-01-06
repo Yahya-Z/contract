@@ -11,6 +11,7 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <style>
         /* Change color of the date picker icon */
         input[type="date"]::-webkit-calendar-picker-indicator {
@@ -291,7 +292,21 @@
         .top-p{
             margin-top: 17px;
         }
-        
+        .btn-primary {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -299,5 +314,9 @@
     {{ $slot }}
 
     <script src="{{ mix('js/app.js') }}"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 </body>
 </html>

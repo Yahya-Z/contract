@@ -8,6 +8,7 @@
       <p><strong>Date:</strong> {{ $contract->contract_date }}</p>
       <p><strong>Hijri Date:</strong> {{ $contract->contract_hijri_date }}</p>
       <p><strong>Location:</strong> {{ $contract->contract_location }}</p>
+      <p><strong>Number:</strong> {{ $contract->contract_number }}</p>
     </div>
   </header>
 
@@ -42,9 +43,11 @@
     <p><strong>Contract Value in Words:</strong> {{ $contract->contract_value_words }}</p>
   </section>
 
-  <!-- Back Button -->
+  <!-- Action Buttons -->
   <footer class="contract-footer">
     <a href="{{ route('contracts.index') }}" class="back-button">Back to Contracts</a>
+    <a href="{{ route('contracts.pdf', $contract->id) }}" target="_blank" class="btn-primary">Preview PDF</a>
+    <a href="{{ route('contracts.download', $contract->id) }}" class="download-button">Download PDF</a>
   </footer>
 </div>
 

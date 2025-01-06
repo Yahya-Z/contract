@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('contract_name');
             $table->date('contract_date');
             $table->date('contract_hijri_date');
+            $table->string('contract_number');
             $table->string('contract_location');
             $table->string('contract_party_a');
             $table->string('contract_party_a_crn');

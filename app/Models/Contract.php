@@ -13,6 +13,7 @@ class Contract extends Model
         'contract_name',
         'contract_date',
         'contract_hijri_date',
+        'contract_number',
         'contract_location',
         'contract_party_a',
         'contract_party_a_crn',
