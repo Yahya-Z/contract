@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Contract;
 use Barryvdh\DomPDF\Facade\Pdf;
-use ArPHP\I18N\Arabic;
-use Carbon\Carbon;
 
 class ContractController extends Controller
 {
@@ -60,21 +59,10 @@ class ContractController extends Controller
         return view('contracts/show', compact('contract'));
     }
     
-    protected $arabic;
-    
-    protected function reshapeArabicText($text)
-    {
-        return $this->arabic->utf8Glyphs($text);
-    }
-
     public function generatePdf($id)
     {
         $contract = Contract::findOrFail($id);
         $pdf = PDF::loadView('pdf/pdf_layout', compact('contract'))->setPaper('a4', 'portrait');    
-
-        foreach ($contract->getAttributes() as $key => $value) {
-            $contract->$key = $this->reshapeArabicText($value);
-        }
 
         return $pdf->stream($contract->contract_name. ' contract.pdf');
     }
