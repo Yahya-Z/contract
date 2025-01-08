@@ -21,6 +21,11 @@
                         <a href="{{ route('contracts.show', $contract->id) }}" class="btn btn-secondary">View Details</a>
                         <a href="{{ route('contracts.pdf', $contract->id) }}" target="_blank" class="btn btn-primary">Preview PDF</a>
                         <a href="{{ route('contracts.download', $contract->id) }}" class="btn btn-success">Download PDF</a>
+                        <form action="{{ route('contracts.destroy', $contract->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this contract?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -74,4 +74,20 @@ class ContractController extends Controller
 
         return $pdf->download($contract->contract_name. ' contract.pdf');
     }
+
+    public function destroy($id)
+    {
+        try {
+            // Find the contract by ID and delete it
+            $contract = Contract::findOrFail($id);
+            $contract->delete();
+
+            // Redirect back with a success message
+            return redirect()->route('contracts.index')->with('success', 'Contract deleted successfully.');
+        } catch (\Exception $e) {
+            // Handle the exception
+            return redirect()->route('contracts.index')->with('error', 'Failed to delete the contract.');
+        }
+    }
+
 }

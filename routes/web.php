@@ -15,3 +15,5 @@ Route::get('/contracts/{contract}', [ContractController::class, 'show'])->name('
 
 Route::get('/contracts/{id}/pdf', [ContractController::class, 'generatePdf'])->name('contracts.pdf');
 Route::get('/contracts/{id}/download', [ContractController::class, 'downloadPdf'])->name('contracts.download');
+
+Route::delete('/contracts/{id}', [ContractController::class, 'destroy'])->name('contracts.destroy');
