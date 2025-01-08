@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Contract;
 use Barryvdh\DomPDF\Facade\Pdf;
+use ArPHP\I18N\Arabic;
+use Carbon\Carbon;
 
 class ContractController extends Controller
 {
@@ -35,7 +36,7 @@ class ContractController extends Controller
                 'contract_party_b' => 'required|string|max:255',
                 'contract_party_b_crn' => 'required|integer',
                 'contract_party_b_location' => 'required|string|max:255',
-                'contract_party_b_detailed_needs' => 'nullable|string|max:1000',
+                'contract_party_b_detailed_needs' => 'nullable|string|max:10000',
                 'contract_value' => 'required|string|max:255',
                 'currency' => 'required|string|max:3', 
                 'contract_value_words' => 'required|string|max:255',
@@ -56,25 +57,33 @@ class ContractController extends Controller
 
     public function show(Contract $contract)
     {
-        return view('contracts.show', compact('contract'));
+        return view('contracts/show', compact('contract'));
+    }
+    
+    protected $arabic;
+    
+    protected function reshapeArabicText($text)
+    {
+        return $this->arabic->utf8Glyphs($text);
     }
 
     public function generatePdf($id)
     {
         $contract = Contract::findOrFail($id);
-        $pdf = PDF::loadView('pdf.pdf_layout', compact('contract'))->setPaper('a4', 'portrait');;
+        $pdf = PDF::loadView('pdf/pdf_layout', compact('contract'))->setPaper('a4', 'portrait');    
 
-        return $pdf->stream('contract_preview.pdf');
+        foreach ($contract->getAttributes() as $key => $value) {
+            $contract->$key = $this->reshapeArabicText($value);
+        }
+
+        return $pdf->stream($contract->contract_name. ' contract.pdf');
     }
 
     public function downloadPdf($id)
     {
         $contract = Contract::findOrFail($id);
-        $pdf = PDF::loadView('pdf.pdf_layout', compact('contract'))->setPaper('a4', 'portrait');;
+        $pdf = PDF::loadView('pdf/pdf_layout', compact('contract'))->setPaper('a4', 'portrait');
 
-        return response($pdf->stream('contract_preview.pdf'), 200, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="contract_preview.pdf"',
-        ]);
+        return $pdf->download($contract->contract_name. ' contract.pdf');
     }
 }

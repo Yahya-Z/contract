@@ -8,7 +8,8 @@
 
         /* Contract Paper and fonts */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Amiri', sans-serif;
+            direction: rtl; /* Ensure right-to-left alignment */
             margin: 0;
             padding: 0;
             background-color: #fff;
